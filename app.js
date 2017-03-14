@@ -1,3 +1,4 @@
+require('./api/data/dbconnection.js').open();
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -10,7 +11,7 @@ app.set('port', 3000);
 // Middleware
 app.use(function(req,res,next){ console.log(req.method, req.url); next(); });
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended : false}));
+app.use(bodyParser.urlencoded({ extended: false}));
 app.use('/api', routes);
 
 
