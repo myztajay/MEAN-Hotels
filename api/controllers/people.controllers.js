@@ -1,10 +1,8 @@
-var dbconn = require('../data/dbconnection.js');
-var ObjectId = require('mongodb').ObjectId;
-var peopleData = require('../data/hotel-data.json');
+var mongoose = require('mongoose');
+var Person = mongoose.model('Person');
 
 module.exports.peopleGetAll = function(req, res) {
-    var db = dbconn.get();
-    var collection = db.collection('people');
+
 
     var offset = 0;
     var count = 5;
@@ -16,28 +14,23 @@ module.exports.peopleGetAll = function(req, res) {
         count = parseInt(req.query.count, 10);
     }
 
-    collection
-      .find()
-      .skip(offset)
-      .limit(count)
-      .toArray(function(err, people){
-      console.log("hotels found", collection);
-    res
+    Person
+    .find()
+    .skip(offset)
+    .limit(count)
+    .exec(function(err, people){
+      console.log("Found People ", people.length);
+      res
       .json(people);
-      });
-
+    });
 };
 
 module.exports.peopleGetOne = function(req, res) {
-    var db = dbconn.get();
-    var collection = db.collection('people');
-
     var personId = req.params.personId;
     console.log("GET the Person, ID: " + personId);
-    collection
-      .findOne({
-        _id: ObjectId(personId)
-      }, function(err, person){
+    Person
+      .findById(personId)
+      .exec(function(err, person){
         res
         .json(person);
       });
