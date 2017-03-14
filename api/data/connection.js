@@ -13,3 +13,6 @@ mongoose.connection.on('disconnected', function(){
 mongoose.connection.on('error', function(err){
   console.log('mongoose error: ' + err);
 });
+
+// Bring in Schema and Model
+require('./person.model.js');
