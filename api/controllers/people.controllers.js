@@ -1,11 +1,40 @@
 var mongoose = require('mongoose');
 var Person = mongoose.model('Person');
 
+var runGeoQuery = function(req,res){
+  var lng = parseInt(req.query.lng);
+  var lat = parseInt(req.query.lat);
+
+  var point = {
+    type: "Point",
+    coordinates: [lng, lat]
+  };
+
+  var geoOptions = {
+    spherical: true,
+    maxDistance: 2000,
+    num : 5
+  };
+
+Person
+.geoNear(point, geoOptions, function(err,results,stats){
+  console.log(results);
+  console.log(stats);
+  res
+  .status(200)
+  .json(results);
+});
+};
 module.exports.peopleGetAll = function(req, res) {
-
-
     var offset = 0;
     var count = 5;
+
+    if (req.query && req.query.lat && req.query.lng) {
+      runGeoQuery(req, res);
+      return;
+    }
+
+
     if (req.query && req.query.offset) {
         offset = parseInt(req.query.offset, 10);
         console.log("true");

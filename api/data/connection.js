@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var dburl = 'mongodb://localhost:27017/persona';
 
+mongoose.Promise = global.Promise;
 mongoose.connect(dburl);
 mongoose.connection.on('connected', function(){
   console.log('mongoose connected to ' + dburl);

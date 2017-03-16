@@ -12,10 +12,11 @@ app.set('port', 3000);
 app.use(function(req,res,next){ console.log(req.method, req.url); next(); });
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false}));
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
+//prefix for routes
 app.use('/api', routes);
 
-
-// S
+//server listening
 var server = app.listen(app.get('port'), function(){
   var port = server.address().port;
   console.log("listening on " + port);
