@@ -9,7 +9,8 @@
   <body>
     <h1>Persona</h1>
     <p>A place to get to inspect yourself using other peoples Eyes</p>
-    <main ng-view></main>
+    <div ng-view></div>
+    <ui-view></ui-view>
     <footer class="footer">
       <div class="container">
         <p class="text-muted text-center">
@@ -23,8 +24,9 @@
     </footer>
 
     <script src="jquery/jquery-3.1.1.min.js"></script>
-    <script src="node_modules/angular/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+    <script src="../node_modules/angular/angular.js"></script>
+    <script src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../node_modules/angular-route/angular-route.js"></script>
     <script src="angular-app/angular-app.js"></script>
     <script src="angular-app/people-list/people-list-controller.js"></script>
     <script src="angular-app/person-display/person-display-controller.js"></script>
